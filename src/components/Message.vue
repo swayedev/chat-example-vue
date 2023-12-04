@@ -7,7 +7,7 @@ const props = defineProps({
 })
 </script>
 <template>
-    <div :class="`${right ? 'self-end' : ''} flex items-end mb-2`">
+    <div :class="`${right ? 'self-end' : ''} flex items-end mb-4`">
         <MessageBubble v-if="right" :msg="msg"/>
         <!-- User Avatar -->
         <img :src="user.avatar" :alt="user.name"
