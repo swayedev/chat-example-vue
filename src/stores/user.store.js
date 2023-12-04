@@ -1,14 +1,14 @@
-// stores/counter.js
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
     state: () => ({
+        id: 1,
         name: "Tony",
         username: "tmeister",
         note: "Shopping",
         activity: "playing destiny 2",
         status: "online",
-        picture: "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w600/2023/10/free-images.jpg"
+        avatar: "https://i.pinimg.com/564x/17/aa/48/17aa484b520a96167baf5f3f4627cca3.jpg"
     }),
 
     actions: {
