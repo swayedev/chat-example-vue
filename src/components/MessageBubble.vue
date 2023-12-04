@@ -1,33 +1,79 @@
 <script setup>
 import Embed from './Embed.vue'
 const props = defineProps({
-  color: String,  
+  color: String,
   msg: String,
 })
 
-function createYouTubeEmbedLink(url) {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    const match = url.match(regExp);
+let embed = false
+let embedLink = ''
+let hasImage = false
+let msgImage = ''
+embedLink = extractAndEmbedYouTubeLink()
+if (embedLink) {
+  embed = true
+}
+msgImage = createImageElementFromText()
+if (msgImage) {
+  hasImage = true
+}
 
-    if (match && match[2].length === 11) {
-        // Create an iframe with the embedded YouTube video
-        return `<iframe width="560" height="315" src="https://www.youtube.com/embed/${match[2]}" frameborder="0" allowfullscreen></iframe>`;
+function extractAndEmbedYouTubeLink() {
+  // Regular expression to match a YouTube URL
+  const youtubeRegExp = /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([^\s&]+)/;
+  const match = props.msg.match(youtubeRegExp);
+
+  if (match && match[1].length === 11) {
+    // Create an iframe with the embedded YouTube video
+    return `https://www.youtube.com/embed/${match[1]}`;
+  } else {
+    // Return a message or null if no valid YouTube URL is found
+    return '';
+  }
+}
+
+function createImageElementFromText() {
+    // Regular expression to match image URLs (jpg, png, gif)
+    const imageUrlRegExp = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i;
+    const match = props.msg.match(imageUrlRegExp);
+
+    if (match) {
+        return match[0];
     } else {
-        // Return a message or null if the URL is not a valid YouTube URL
-        return 'Invalid YouTube URL';
+        return '';
     }
 }
 
 // Example usage:
-const url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-const embedCode = createYouTubeEmbedLink(url);
+const textWithImageUrl = "Some random text https://media.tenor.com/E05AfL5sZ08AAAAC/goku-lol.gif more random text";
+const imageElement = createImageElementFromText(textWithImageUrl);
+
+if (imageElement instanceof HTMLImageElement) {
+    // Append the image to the body or any other container
+    document.body.appendChild(imageElement);
+} else {
+    console.log(imageElement); // Logs if no valid image URL is found
+}
 
 
 </script>
 <template>
-    <!-- Message Bubble -->
-    <div :class="`${color ? color : 'bg-blue-200'} p-3 rounded max-w-max text-xl`">
-      {{msg}}
-      <Embed />
+  <!-- Message Bubble -->
+  <div :class="`${color ? color : 'bg-blue-200'} p-3 rounded max-w-max text-xl shadow-soft-xl`">
+    <div class="break-all">
+      {{ msg }}
     </div>
+    <div>
+     <img v-if="hasImage" :src="msgImage" class="h-full w-full"/> 
+    </div>
+    <Embed v-if="embed" :link="embedLink" />
+  </div>
 </template>
+
+<style>
+.shadow-soft-xl {
+  --tw-shadow: 0 20px 27px 0 rgba(0, 0, 0, .05);
+  --tw-shadow-colored: 0 20px 27px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+</style>
