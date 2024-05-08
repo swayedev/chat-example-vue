@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import Message from '../components/Message.vue'
 
 const props = defineProps({
@@ -21,14 +21,16 @@ const findMemberById = id => props.members.find(member => member.id === id)
             <div class="border-black rounded-t-2xl border-b-0 border-solid p-6 shadow-soft-3xl">
                 <div class="flex flex-wrap -mx-3">
                     <div class="w-full max-w-full px-3 shrink-0">
+
                         <div class="flex items-center">
+                            <slot name="header"></slot>
                             <img :src="image" :alt="name"
                                 class="inline-flex items-center justify-center w-12 h-12 text-white transition-all duration-200 text-base ease-soft-in-out rounded-xl">
                             <div class="ml-4">
                                 <h6 class="block mb-0">{{ name }}</h6>
                                 <span class="leading-normal text-sm opacity-80 text-slate-700">{{ description }}</span>
                             </div>
-                            <div class="flex gap-3 grow align-items-end justify-end">
+                            <div class="flex gap-3 grow align-items-end justify-end mr-4">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

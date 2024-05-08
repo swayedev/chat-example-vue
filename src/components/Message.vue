@@ -1,6 +1,6 @@
-<script setup>
+<script lang="ts" setup>
 import MessageBubble from './MessageBubble.vue'
-const props = defineProps({
+defineProps({
   user: Object,
   msg: String,
   group: Boolean,

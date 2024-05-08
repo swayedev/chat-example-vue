@@ -162,6 +162,11 @@ export const useChannelStore = defineStore('channel', {
                         id: 8,
                         author: 1,
                         content: "https://media.tenor.com/sAqMHb0yzHgAAAAC/dancing-cat-jump-cat.gif"
+                    },
+                    {
+                        id: 9,
+                        author: 2,
+                        content: "https://media.tenor.com/7zUwCo9n4iEAAAAC/jollibae-jollibee.gif"
                     }
                 ]
             }

@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import Embed from './Embed.vue'
 const props = defineProps({
   color: String,
@@ -21,7 +21,7 @@ if (msgImage) {
 function extractAndEmbedYouTubeLink() {
   // Regular expression to match a YouTube URL
   const youtubeRegExp = /(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|v\/))([^\s&]+)/;
-  const match = props.msg.match(youtubeRegExp);
+  const match = props.msg?.match(youtubeRegExp);
 
   if (match && match[1].length === 11) {
     // Create an iframe with the embedded YouTube video
@@ -35,7 +35,7 @@ function extractAndEmbedYouTubeLink() {
 function createImageElementFromText() {
     // Regular expression to match image URLs (jpg, png, gif)
     const imageUrlRegExp = /(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/i;
-    const match = props.msg.match(imageUrlRegExp);
+    const match = props.msg?.match(imageUrlRegExp);
 
     if (match) {
         return match[0];
@@ -45,16 +45,7 @@ function createImageElementFromText() {
 }
 
 // Example usage:
-const textWithImageUrl = "Some random text https://media.tenor.com/E05AfL5sZ08AAAAC/goku-lol.gif more random text";
-const imageElement = createImageElementFromText(textWithImageUrl);
-
-if (imageElement instanceof HTMLImageElement) {
-    // Append the image to the body or any other container
-    document.body.appendChild(imageElement);
-} else {
-    console.log(imageElement); // Logs if no valid image URL is found
-}
-
+// const textWithImageUrl = "Some random text https://media.tenor.com/E05AfL5sZ08AAAAC/goku-lol.gif more random text";
 
 </script>
 <template>
