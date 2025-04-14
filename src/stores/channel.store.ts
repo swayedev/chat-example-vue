@@ -172,7 +172,7 @@ export const useChannelStore = defineStore('channel', {
             }
         ],
         available: [],
-        current: 2
+        current: 1
     }),
     getters: {
         activeChannel: state => {

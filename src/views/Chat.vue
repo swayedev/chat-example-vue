@@ -31,12 +31,15 @@ if (members.length == 2) {
 </script>
 
 <template>
+    <div class="fixed w-60 h-full z-10 bg-slate-300 sm:hidden">
+        <div class=""></div>
+    </div>
     <div class="flex h-screen max-w-screen">
         <div class="grow">
             <Chat :group="group" :name="name" :image="picture" :description="description" :userId="user.id"
                 :messages="messages" :members="members">
                 <template v-slot:header>
-                    <div class="p-2 mx-2 sm:hidden">
+                    <div class="py-2 pr-2 my-2 mr-2 sm:hidden z-20">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"

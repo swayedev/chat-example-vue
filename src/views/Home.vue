@@ -14,6 +14,11 @@ const user = useUserStore()
   <div class="flex flex-col h-full w-full">
     <div class="fixed h-14">
       Navigation / Header
+      <RouterLink to="/chat">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Chat
+        </button>
+      </RouterLink>
     </div>
     <div class="grow pt-14">
       Dashboard

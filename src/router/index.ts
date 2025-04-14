@@ -3,7 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   { path: '/', component: () => import('../views/Home.vue') },
   { path: '/login', component: () => import('../views/Login.vue') },
-  { path: '/chat', component: () => import('../views/Chat.vue') }
+  { path: '/chat', component: () => import('../views/Chat.vue') },
+  { path: '/chat/{id}', component: () => import('../views/Chat.vue') }
 ]
 
 const router = createRouter({
